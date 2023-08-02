@@ -1,0 +1,94 @@
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+
+" Don't try to be compatible with vi
+set nocompatible 
+" Never get into Ex mode
+map Q <Nop>
+
+set ruler
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tabs 
+
+set expandtab
+set shiftwidth=2
+set tabstop=2
+set autoindent
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Search
+
+" Highlight all matching phrases
+set hlsearch  
+"Ignore upper/lower case when searching
+set ignorecase
+" Show partial matching phrases
+set incsearch
+" Only consider case sensitivity only when search string contains uppercase letters
+set smartcase
+" Clear search highlight results with Esc
+nnoremap <silent> <esc> :noh<return><esc>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colors
+
+syntax on
+
+colorscheme mytheme
+
+" Show matching brackets when cursor is over one of them
+set showmatch 
+
+if &term =~ '256color'
+  " Fix problem of text background was different from background without text.
+  " So, disable Background Color Erase (BGE) so vim color schemes render
+  " properly when inside of 256-color tmux 
+  set t_ut=
+endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Alerts
+
+" Blink coursor instead of beeping
+set visualbell
+" Disable entire screen flashing (disable visual bell completely)
+set t_vb=
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Auto-generated files
+
+" Avoid creating vim files at ~/, instead create them under ~/.vim
+set backupdir=~/.vim/
+set directory=~/.vim/
+set undodir=~/.vim
+set viminfo+=n~/.vim/viminfo  " move viminfo to ~/.vim from ~
+
+" Do not generate the ones below
+set nobackup
+set noswapfile
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Line nbr
+
+set number
+set relativenumber
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Cursor 
+
+" Change cursor format for visual and insert mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+set ttimeout
+set ttimeoutlen=1
+set ttyfast
+
