@@ -1,0 +1,8 @@
+
+[user]
+  name = Afonso Albrecht
+  email = a.schulzalbrecht@gmail.com
+
+[alias]
+  ls= ls-tree --full-tree --name-only -r HEAD
+  logol = log --graph --pretty=format:"%C(#ff8700)%h%x09%Creset%C(#666666)%C(bold)%ad%Creset%x09%s" --date=short
