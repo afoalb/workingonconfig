@@ -1,0 +1,4 @@
+
+! Map Caps_Lock to Escape for better vim experience
+clear Lock
+keycode 66 = Escape
