@@ -1,0 +1,17 @@
+
+! Change monitor DPI (depends on specific monitor)
+Xft.dpi:144
+
+xterm*faceName: xft: Droid Sans Mono
+xterm*faceSize: 12
+xterm*internalBorder: 10
+xterm*saveLines: 50000
+xterm*foreground: #F2F2F4
+xterm*background: #18181A
+xterm*loginShell: true
+! Enable shift-ctrl-c/shift-ctrl-v for copy-paste
+xterm*VT100.Translations: #override \
+    Shift Ctrl <Key> C: copy-selection(CLIPBOARD) \n\
+    Shift Ctrl <Key> V: insert-selection(CLIPBOARD)
+
+
