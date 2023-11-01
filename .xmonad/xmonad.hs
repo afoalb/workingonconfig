@@ -41,7 +41,7 @@ myTerminal = "/usr/bin/xterm -u8"
 -- myWorkspaces = map show [1..9]
 
 myWorkspaces :: [[Char]]
-myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+myWorkspaces = ["1", "2", "3", "4", "5"]
 
 
 
