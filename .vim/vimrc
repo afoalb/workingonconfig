@@ -13,9 +13,12 @@ set ruler
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabs 
 
+" convert tabs to spaces
 set expandtab
-set shiftwidth=2
-set tabstop=2
+" 1 tab = 4 spaces
+set tabstop=4
+" Each identation level contains 4 spaces
+set shiftwidth=4
 set autoindent
 
 
@@ -30,8 +33,8 @@ set ignorecase
 set incsearch
 " Only consider case sensitivity only when search string contains uppercase letters
 set smartcase
-" Clear search highlight results with Esc
-nnoremap <silent> <esc> :noh<return><esc>
+" Clear search highlight results with Ctrl-L (when Esc is used, it makes vim start in insert mode all the time)
+nnoremap <C-L> :noh<CR><C-L>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -91,4 +94,5 @@ let &t_EI = "\e[2 q"
 set ttimeout
 set ttimeoutlen=1
 set ttyfast
+
 
