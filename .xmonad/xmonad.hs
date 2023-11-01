@@ -48,9 +48,9 @@ myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 -------------------------------------------------------------------------------------
 -- Window rules
 
--- TODO: firefox not opening on window 2
+-- App names are are correctly capitalised
 myManageHook = composeAll
-    [ className =? "firefox"        --> doShift "2"
+    [ className =? "Firefox"        --> doShift "2"
     , className =? "stalonetray"    --> doIgnore
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
@@ -125,16 +125,16 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
      windows W.swapMaster)
 
   -- Launch dmenu
-  , ((modMask, xK_p),
+  , ((modMask, xK_space),
     spawn "dmenu_run")
 
   -- Launch Browser
   , ((modMask, xK_b),
     spawn "firefox")
 
-	-- Make laptop go to sleep ZzzZZ (lock it)
-	, ((modMask .|. shiftMask, xK_z),
-		spawn "xscreensaver-command -lock")
+  -- Make laptop go to sleep ZzzZZ (lock it)
+  , ((modMask .|. shiftMask, xK_z),
+	spawn "xscreensaver-command -lock")
 
   -- take screenshot
   , ((modMask, xK_s),
@@ -145,11 +145,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
      kill)
 
   -- Cycle through the available layout algorithms.
-  , ((modMask, xK_space),
+  , ((modMask, xK_u),
      sendMessage NextLayout)
 
   --  Reset the layouts on the current workspace to default.
-  , ((modMask .|. shiftMask, xK_space),
+  , ((modMask .|. shiftMask, xK_u),
      setLayout $ XMonad.layoutHook conf)
 
   -- Move focus to the next window.
