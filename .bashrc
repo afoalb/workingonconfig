@@ -24,7 +24,7 @@ alias ll="ls --group-directories-first --color -laFX"
 alias lr="ls -laFR --color"  # list recursively dirs
 alias open="xdg-open"
 alias conf='/usr/bin/git --git-dir=$HOME/.dotconfig/ --work-tree=$HOME'
-
+alias repo="cd ~/repo"
 
 
 # ======================================================================
