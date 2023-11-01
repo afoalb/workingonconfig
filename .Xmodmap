@@ -1,4 +1,37 @@
 
-! Map Caps_Lock to Escape for better vim experience
-clear Lock
-keycode 66 = Escape
+! ----------------------------------------------------------------------------
+! Turn Caps_Lock into Control 
+! Turn Control into Alt 
+!   - (Move "Alt" below the letter "A" on the keyboard).
+
+! Clear the keys
+clear lock
+clear control
+clear mod1
+! Assign the keys
+keycode 66 = Control_L
+keycode 37 = Alt_L Meta_L
+keycode 64 = 
+! Add them back with the new assignments
+add control = Control_L Control_R
+add mod1 = Alt_L Meta_L
+
+
+! ----------------------------------------------------------------------------
+! When Alt is pressed, turn HJKL keys into arrow keys (mimic vim-keybindings)
+keycode 37 = Mode_switch
+keysym h = h H Left
+keysym l = l L Right
+keysym j = j J Down
+keysym k = k K Up
+
+
+! Swap < and ` keys
+keycode 49 = less greater
+keycode 94 = grave asciitilde
+
+
+
+
+! Note: Enter `$ xev` in the terminal to identify the keycode and the name.
+
