@@ -21,7 +21,7 @@ import qualified XMonad.StackSet as W
 import XMonad.Hooks.SetWMName
 
 
--------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- Structure:
 -- First comes all configs, at the end of the document the configs are grouped
 -- together in one variable and this is passed to the main function to run
@@ -29,13 +29,13 @@ import XMonad.Hooks.SetWMName
 
 
 
--------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- Terminal
 
 myTerminal = "/usr/bin/xterm -u8"
 
 
--------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- Workspaces
 
 -- myWorkspaces = map show [1..9]
@@ -45,7 +45,7 @@ myWorkspaces = ["1", "2", "3", "4", "5"]
 
 
 
--------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- Window rules
 
 -- App names are are correctly capitalised
@@ -54,7 +54,7 @@ myManageHook = composeAll
     , className =? "stalonetray"    --> doIgnore
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
--------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- Layouts
 
 myLayout = avoidStruts (
@@ -69,7 +69,7 @@ myLayout = avoidStruts (
     noBorders (fullscreenFull Full)
     )
 
--------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- Colors and borders
 
 -- Color palette 
@@ -107,7 +107,7 @@ myTabConfig = defaultTheme {
 }
 
 
--------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- Key bindings
 -- NOTE: Standard xmonad key bindings must remain in the file as xmonad
 -- overrides all standard ones when I define my own.
@@ -116,7 +116,7 @@ myModMask = mod4Mask
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $	
 
-  -- terminal
+  -- terminal (mod-shift-return)
   [ ((modMask, xK_Return),  -- default: mod-shift-return
      spawn $ XMonad.terminal conf)
 
@@ -138,7 +138,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- take screenshot
   , ((modMask, xK_s),
-     spawn "gnome-screenshot --interactive")
+     spawn "shutter --select")
 
   -- Close focused window.
   , ((modMask .|. shiftMask, xK_c),  -- default: mod-shift-c
@@ -228,7 +228,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 
--------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- Mouse bindings
 
 myFocusFollowsMouse :: Bool
@@ -236,7 +236,7 @@ myFocusFollowsMouse = True
 
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
   [
-    -- mod-button1, Set the window to floating mode and move by dragging
+    -- mod-button1, (left click) Set the window to floating mode and move by dragging
     ((modMask, button1),
      (\w -> focus w >> mouseMoveWindow w))
 
@@ -244,20 +244,20 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask, button2),
        (\w -> focus w >> windows W.swapMaster))
 
-    -- mod-button3, Set the window to floating mode and resize by dragging
+    -- mod-button3, (right click) Set the window to floating mode and resize by dragging 
     , ((modMask, button3),
        (\w -> focus w >> mouseResizeWindow w))
   ]
 
 
--------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- Startup hook
 -- when xmonad starts
 
 myStartupHook = return ()
 
 
--------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- Combine all configs into `myConfig`
 
 myConfig = defaultConfig {
@@ -267,33 +267,32 @@ myConfig = defaultConfig {
     , workspaces          = myWorkspaces
     , normalBorderColor   = myNormalBorderColor
     , focusedBorderColor  = myFocusedBorderColor
-    , layoutHook          = smartBorders $ myLayout  -- spacingWithEdge 5 $  -- spacing doens't go well with tabbed (still to be solved)
-    ,  keys               = myKeys
-    ,  focusFollowsMouse  = myFocusFollowsMouse
-    ,  mouseBindings      = myMouseBindings
-    ,  manageHook         = myManageHook
-    ,  startupHook        = myStartupHook
+    , layoutHook          = smartBorders $ myLayout -- spacingWithEdge 5 $  -- spacing doesn't go well with tabbed (still to be solved)
+    , keys                = myKeys
+    , focusFollowsMouse   = myFocusFollowsMouse
+    , mouseBindings       = myMouseBindings
+    , manageHook          = myManageHook
+    , startupHook         = myStartupHook
 }
 
 
--------------------------------------------------------------------------------------
--- Run xmonad with `defaults`
+----------------------------------------------------------------------------
+-- Main
 
 main = do
     xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
     xmonad $ myConfig
-        { handleEventHook = handleEventHook myConfig <+> docksEventHook -- fix xmonad overlaying xmobar
+        { handleEventHook = handleEventHook myConfig <+> docksEventHook     -- fix xmonad overlaying xmobar
         , logHook = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn xmproc
-																							, ppOrder = \(ws : _ : t : _) -> [ws, t] -- what to show after the workspace nbr
-																							, ppTitle = xmobarColor grey4 "" . shorten 40
-																							, ppWsSep = " " -- separation between workspace nbrs
-																							, ppSep = xmobarColor grey4 "" " • " -- separation between group of workspaces and next group
-																							, ppCurrent = xmobarColor white1 "" . wrap (xmobarColor white1 "" "[") (xmobarColor white1 "" "]")
-																							, ppHidden = xmobarColor grey2 "" . wrap " " ""
-																							, ppHiddenNoWindows = xmobarColor grey6 "" . wrap " " ""
-																							}
-				, manageHook = manageDocks <+> myManageHook
+        , ppOrder = \(ws : _ : t : _) -> [ws, t]                            -- what to show after the workspace nbr
+        , ppTitle = xmobarColor grey4 "" . shorten 40
+        , ppWsSep = " "                                                     -- separation between workspace nbrs
+        , ppSep = xmobarColor grey4 "" " • "                                -- separation between group of workspaces and next group
+        , ppCurrent = xmobarColor white1 "" . wrap (xmobarColor white1 "" "[") (xmobarColor white1 "" "]")
+        , ppHidden = xmobarColor grey2 "" . wrap " " ""
+        , ppHiddenNoWindows = xmobarColor grey6 "" . wrap " " ""
+        }
+        , manageHook = manageDocks <+> myManageHook
         , startupHook = setWMName "LG3D"
         }
-
 

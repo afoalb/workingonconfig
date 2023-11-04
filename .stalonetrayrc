@@ -3,14 +3,14 @@ decorations none
 transparent false
 background "#2B2E37"
 dockapp_mode none
-geometry 1x1-20+5
+geometry 1x1-1130+7
 kludges force_icons_size
-grow_gravity NW
-icon_gravity NW
+grow_gravity NE
+icon_gravity NE
 icon_size 26
 sticky true
-#window_strut none
+window_strut none  # commented
 window_type dock
 window_layer bottom
-#no_shrink false
+no_shrink false
 skip_taskbar true
