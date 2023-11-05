@@ -1,15 +1,17 @@
 #!/bin/bash
 
-xsetroot -solid "#212123"  # setup wallpaper color
+lxsession &
 
-xrdb -merge .Xresources  # setup xterm
+xsetroot -solid "#212123" &  # wallpaper color
+
+xrdb -merge .Xresources &  # xterm
+
+[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap &  # keymaps
+
+xscreensaver -no-splash &  # screensaver
 
 stalonetray &  # start icon tray
 
-xscreensaver -no-splash &  # start xscreensaver
-
-[[ -x /usr/bin/nm-applet ]] && nm-applet &  # start network manager
-
-[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap  # change keybindings
+[[ -x /usr/bin/nm-applet ]] && nm-applet &  # network manager
 
 exec xmonad  # start xmonad
