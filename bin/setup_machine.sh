@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e  # exit script immediately on errors
+
 
 install_packages() {
 
@@ -95,7 +97,7 @@ install_python_36() {
     sudo add-apt-repository ppa:jonathonf/python3.6
     sudo apt-get update
     echo "Installing python 3.6..."
-    sudo install python3.6
+    sudo apt-get install python3.6
 }
 
 
