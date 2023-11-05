@@ -1,10 +1,73 @@
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap leader 
+
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'w0rp/ale'
+Plugin 'majutsushi/tagbar'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'janko-m/vim-test'
+Plugin 'vim-scripts/a.vim'
+
+call vundle#end()
+filetype plugin indent on 
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins Config
+
+" ALE
+nmap <leader>an : ALENext<CR>
+nmap <leader>ap : ALEPrevious<CR>
+let g:ale_linters = {
+    \ 'c': ['clang', 'cppcheck', 'flawfinder'],
+    \ 'cpp': ['clang', 'cppcheck', 'flawfinder'],
+    \ 'python': ['flake8'],
+    \ }
+
+
+" NERDTree
+nmap <leader>f :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" TagBar
+nmap <leader>t :TagbarToggle<CR>
+
+" A.vim
+nmap <leader>a :A<CR>
+
+" Vim-test
+nmap <leader>i :TestNearest<CR>
+
+" NERDCommenter
+nmap <leader>c <plug>NERDCommenterToggle
+vmap <leader>c <plug>NERDCommenterToggle
+let g:NERDSpaceDelims = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 
-" Don't try to be compatible with vi
-set nocompatible 
+" Vundle req.
+set nocompatible
+filetype off
+
 " Never get into Ex mode
 map Q <Nop>
 
@@ -33,8 +96,8 @@ set ignorecase
 set incsearch
 " Only consider case sensitivity only when search string contains uppercase letters
 set smartcase
-" Clear search highlight results with Ctrl-L (when Esc is used, it makes vim start in insert mode all the time)
-nnoremap <C-L> :noh<CR><C-L>
+" Clear search highlight results (don't use Esc: it makes vim start in insert mode)
+nnoremap <leader><leader> :noh<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
