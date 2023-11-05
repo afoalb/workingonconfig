@@ -27,9 +27,11 @@ alias downloads="cd ~/Downloads"
 
 alias ll="ls --group-directories-first --color -laFX"
 alias lr="ls -laFR --color"  # list recursively dirs
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 alias open="xdg-open"
 alias vimb="vim --noplugin"
-
 
 
 # ======================================================================
