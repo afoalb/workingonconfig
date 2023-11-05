@@ -20,11 +20,16 @@ fi
 # ======================================================================
 # Aliases
 
+alias conf='/usr/bin/git --git-dir=$HOME/.dotconfig/ --work-tree=$HOME'
+
+alias repo="cd ~/repo"
+alias downloads="cd ~/Downloads"
+
 alias ll="ls --group-directories-first --color -laFX"
 alias lr="ls -laFR --color"  # list recursively dirs
 alias open="xdg-open"
-alias conf='/usr/bin/git --git-dir=$HOME/.dotconfig/ --work-tree=$HOME'
-alias repo="cd ~/repo"
+alias vimb="vim --noplugin"
+
 
 
 # ======================================================================
@@ -51,3 +56,5 @@ PS1+="\[${dark_green}\]\$ ";   # display $ and when having superuser privileges 
 PS1+="\[${reset}\]"; 
 
 export PS1; 
+
+
