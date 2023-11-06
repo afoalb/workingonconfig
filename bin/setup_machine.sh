@@ -97,10 +97,10 @@ install_python_36() {
     echo "Installing requirements..."
     sudo apt-get install software-properties-common python-software-properties -y
     echo "Adding PPA repo for python 3.6..."
-    sudo add-apt-repository ppa:jonathonf/python3.6
+    sudo add-apt-repository -y ppa:jonathonf/python3.6
     sudo apt-get update
     echo "Installing python 3.6..."
-    sudo apt-get install python3.6
+    sudo apt-get install python3.6 -y
 
     # pip doesn't come with python installed via PPA's
     echo "Installing pip"
@@ -119,6 +119,8 @@ main() {
     install_python_36
 
     set_default_apps
+
+    echo "Machine has been successfully set up! Restart for changes to take effect."
 }
 
 main
