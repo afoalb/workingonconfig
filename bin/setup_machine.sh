@@ -2,10 +2,10 @@
 
 set -e  # exit script immediately on errors
 
-
 install_packages() {
 
     packages=(
+        'curl'
         'build-essential'  # c/c++ dev
         'clang'  #  c/c++ basic linter
         'cppcheck'  #  c/c++ linter (bit more advanced) 
@@ -16,7 +16,9 @@ install_packages() {
         'tmux'
         'dmenu'
         'openssh-server'
-        'python3-pip'
+        'python3-dev'   # python headers
+        'python3-pip'   # python package manager
+        'python-virtualenv'  # python virtualenv
         'flake8'  # python linter
         'haskell-stack'  # haskell dev
         'xmonad'  # window manager
@@ -34,7 +36,8 @@ install_packages() {
     do 
         if ! hash "$package" 2>/dev/null; then
             echo "Installing ${package}..."
-            sudo apt-get install "$package" -y || echo "!!! Something went wrong while installing ${package}." continue
+            sudo apt-get install "$package" -y \
+            || echo "!!! Something went wrong while installing ${package}." continue
 
             echo "${package} successfully installed."
         else
@@ -51,9 +54,6 @@ set_default_apps() {
 
     echo "Setting PCManFM as default file manager..."
     sudo xdg-mime default pcmanfm.desktop inode/directory
-
-    echo "Setting python3.6 as default python3..."
-    sudo update-alternatives --set python3 /usr/bin/python3.6
 }
 
 install_vim8() {
@@ -89,7 +89,6 @@ install_and_setup_plugins() {
 }
 
 
-# install python3.6 and pip install virtualenv
 install_python_36() {
     echo "Installing requirements..."
     sudo apt-get install software-properties-common python-software-properties -y
@@ -98,6 +97,10 @@ install_python_36() {
     sudo apt-get update
     echo "Installing python 3.6..."
     sudo apt-get install python3.6
+
+    # pip doesn't come with python installed via PPA's
+    echo "Installing pip"
+    curl https://bootstrap.pypa.io/get-pip.py | sudo -H python3.6
 }
 
 
