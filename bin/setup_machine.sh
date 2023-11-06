@@ -10,12 +10,13 @@ install_packages() {
         'clang'  #  c/c++ basic linter
         'cppcheck'  #  c/c++ linter (bit more advanced) 
         'flawfinder'  #  c/c++ linter (security related)
-        'cmake'
+        'cmake'  # c/c++ build system
         'gdb'  # c/c++ debugger
         'xterm'  # terminal emulator
-        'tmux'
-        'dmenu'
-        'openssh-server'
+        'tmux'  # terminal multiplexer
+        'dmenu'  # search menu
+        'openssh-server'  # get ssh connections
+        'openssh-client'  # connect to via ssh
         'python3-dev'   # python headers
         'python3-pip'   # python package manager
         'python-virtualenv'  # python virtualenv
@@ -51,6 +52,9 @@ set_default_apps() {
 
     echo "Setting xterm as default terminal..."
     sudo update-alternatives --set x-terminal-emulator /usr/bin/xterm
+
+    echo "Setting vim.basic as default editor..."
+    sudo update-alternatives --set editor /usr/bin/vim.basic
 
     echo "Setting PCManFM as default file manager..."
     sudo xdg-mime default pcmanfm.desktop inode/directory
